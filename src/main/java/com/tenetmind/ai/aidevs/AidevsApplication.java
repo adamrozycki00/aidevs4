@@ -1,4 +1,4 @@
-package com.ebay.ai.aidevs;
+package com.tenetmind.ai.aidevs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

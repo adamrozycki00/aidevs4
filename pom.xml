@@ -8,7 +8,7 @@
         <version>4.0.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ebay.ai</groupId>
+    <groupId>com.tenetmind.ai</groupId>
     <artifactId>aidevs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>aidevs</name>

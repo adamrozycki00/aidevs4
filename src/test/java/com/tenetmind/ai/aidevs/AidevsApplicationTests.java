@@ -1,4 +1,4 @@
-package com.ebay.ai.aidevs;
+package com.tenetmind.ai.aidevs;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
