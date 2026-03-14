@@ -4,8 +4,6 @@ import com.tenetmind.ai.aidevs.config.Secrets;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.client.RestClient;
 
-import java.util.List;
-
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @RequiredArgsConstructor
@@ -14,7 +12,7 @@ public class AnswerSender {
   private final RestClient restClient;
   private final Secrets.Brave secrets;
 
-  public Object send(String task, List<Object> answer) {
+  public Object send(String task, Object answer) {
     var request = AnswerRequest.builder()
         .apikey(secrets.getApiKey())
         .task(task)

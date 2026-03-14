@@ -1,7 +1,7 @@
 package com.tenetmind.ai.aidevs.client;
 
 import com.tenetmind.ai.aidevs.config.Secrets;
-import com.tenetmind.ai.aidevs.task01.extractor.OpenRouterResponse;
+import com.tenetmind.ai.aidevs.tasks.task01.extractor.OpenRouterResponse;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;

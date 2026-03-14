@@ -1,8 +1,8 @@
-package com.tenetmind.ai.aidevs.task01.extractor;
+package com.tenetmind.ai.aidevs.tasks.task01.extractor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenetmind.ai.aidevs.client.OpenRouterClient;
-import com.tenetmind.ai.aidevs.task01.Task01;
+import com.tenetmind.ai.aidevs.tasks.task01.Task01;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

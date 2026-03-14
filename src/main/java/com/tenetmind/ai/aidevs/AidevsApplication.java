@@ -1,7 +1,7 @@
 package com.tenetmind.ai.aidevs;
 
 import com.tenetmind.ai.aidevs.sender.AnswerSender;
-import com.tenetmind.ai.aidevs.task01.Task01;
+import com.tenetmind.ai.aidevs.tasks.task01.Task01;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;

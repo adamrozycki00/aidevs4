@@ -1,4 +1,4 @@
-package com.tenetmind.ai.aidevs.task01.extractor;
+package com.tenetmind.ai.aidevs.tasks.task01.extractor;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;

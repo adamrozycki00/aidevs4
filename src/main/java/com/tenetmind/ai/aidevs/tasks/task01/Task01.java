@@ -1,8 +1,9 @@
-package com.tenetmind.ai.aidevs.task01;
+package com.tenetmind.ai.aidevs.tasks.task01;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tenetmind.ai.aidevs.task01.extractor.TagExtractor;
+import com.tenetmind.ai.aidevs.tasks.Task;
+import com.tenetmind.ai.aidevs.tasks.task01.extractor.TagExtractor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.dflib.DataFrame;
@@ -18,14 +19,15 @@ import static java.util.Objects.nonNull;
 import static org.dflib.Exp.$str;
 
 @RequiredArgsConstructor
-public class Task01 {
+public class Task01 implements Task {
 
   @Getter
   private final String name = "people";
   private final TagExtractor tagExtractor;
   private final ObjectMapper mapper = new ObjectMapper();
 
-  public List<Object> getAnswer() {
+  @Override
+  public Object getAnswer() {
     DataFrame src = loadPeople();
 
     DataFrame res = src
@@ -46,6 +48,7 @@ public class Task01 {
             $str("job").mapVal(tagExtractor::extract)
         )
         .rows(r -> {
+          //noinspection rawtypes
           List tags = r.get("tags", List.class);
           return nonNull(tags) && tags.contains("transport");
         }).select()
@@ -54,7 +57,8 @@ public class Task01 {
     var jsonArrayString = Json.saver().saveToString(res);
 
     try {
-     return mapper.readValue(jsonArrayString, new TypeReference<>() {});
+      return mapper.readValue(jsonArrayString, new TypeReference<>() {
+      });
     } catch (Exception e) {
       throw new RuntimeException("Error parsing JSON array", e);
     }
