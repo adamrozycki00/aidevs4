@@ -1,6 +1,8 @@
 package com.tenetmind.ai.aidevs.config;
 
+import com.tenetmind.ai.aidevs.client.OpenRouterClient;
 import com.tenetmind.ai.aidevs.sender.AnswerSender;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
@@ -9,7 +11,23 @@ import org.springframework.web.client.RestClient;
 public class AppConfig {
 
   @Bean
-  public AnswerSender responseSender(RestClient restClient) {
-    return new AnswerSender(restClient);
+  @ConfigurationProperties("secrets")
+  public Secrets secrets() {
+    return new Secrets();
+  }
+
+  @Bean
+  public RestClient restClient() {
+    return RestClient.create();
+  }
+
+  @Bean
+  public OpenRouterClient openRouterClient() {
+    return new OpenRouterClient(restClient(), secrets().getOpenRouter());
+  }
+
+  @Bean
+  public AnswerSender responseSender() {
+    return new AnswerSender(restClient(), secrets().getBrave());
   }
 }
