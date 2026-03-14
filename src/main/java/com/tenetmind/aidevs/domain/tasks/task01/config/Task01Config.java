@@ -1,6 +1,6 @@
 package com.tenetmind.aidevs.domain.tasks.task01.config;
 
-import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
+import com.tenetmind.aidevs.domain.ports.LlmClient;
 import com.tenetmind.aidevs.domain.tasks.task01.Task01;
 import com.tenetmind.aidevs.domain.tasks.task01.extractor.AgentExtractor;
 import com.tenetmind.aidevs.domain.tasks.task01.extractor.DummyExtractor;
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
 public class Task01Config {
 
   @Autowired
-  private OpenRouterClient client;
+  private LlmClient client;
 
   @Bean
   @ConditionalOnProperty(name = "agent.extractor.enabled", havingValue = "false", matchIfMissing = true)

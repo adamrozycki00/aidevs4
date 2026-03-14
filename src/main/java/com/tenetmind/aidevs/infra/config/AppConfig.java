@@ -1,7 +1,9 @@
 package com.tenetmind.aidevs.infra.config;
 
+import com.tenetmind.aidevs.domain.ports.AnswerSender;
+import com.tenetmind.aidevs.domain.ports.LlmClient;
+import com.tenetmind.aidevs.infra.client.brave.BraveClient;
 import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
-import com.tenetmind.aidevs.infra.client.brave.AnswerSender;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,12 +24,12 @@ public class AppConfig {
   }
 
   @Bean
-  public OpenRouterClient openRouterClient() {
+  public LlmClient llmClient() {
     return new OpenRouterClient(restClient(), secrets().getOpenRouter());
   }
 
   @Bean
-  public AnswerSender responseSender() {
-    return new AnswerSender(restClient(), secrets().getBrave());
+  public AnswerSender answerSender() {
+    return new BraveClient(restClient(), secrets().getBrave());
   }
 }

@@ -1,4 +1,4 @@
-package com.tenetmind.ai.aidevs.task01;
+package com.tenetmind.aidevs.task01.domain.tasks.task01;
 
 import com.tenetmind.aidevs.domain.tasks.task01.Task01;
 import com.tenetmind.aidevs.domain.tasks.task01.extractor.DummyExtractor;
@@ -17,7 +17,7 @@ class Task01Test {
     Task01 task01 = new Task01(new DummyExtractor());
 
     // when
-    var answer = (List<Object>) task01.getAnswer();
+    var answer = (List<Object>) task01.solve();
 
     // then the answer should contain 31 people that fulfill all criteria ignoring the "transport" tag
     assertThat(answer).hasSize(31);

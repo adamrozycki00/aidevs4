@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.domain.tasks.task01.extractor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
+import com.tenetmind.aidevs.domain.ports.LlmClient;
 import com.tenetmind.aidevs.domain.tasks.task01.Task01;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ public class AgentExtractor implements TagExtractor {
       The tags should be related to the content of the text and should be selected from this list: %s.
       """;
 
-  private final OpenRouterClient client;
+  private final LlmClient client;
   private final ObjectMapper mapper = new ObjectMapper();
 
   @Override

@@ -1,10 +1,10 @@
 package com.tenetmind.aidevs.infra.client.openrouter;
 
-import com.tenetmind.aidevs.infra.config.Secrets;
+import com.tenetmind.aidevs.domain.ports.LlmClient;
 import com.tenetmind.aidevs.domain.tasks.task01.extractor.OpenRouterResponse;
+import com.tenetmind.aidevs.infra.config.Secrets;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
@@ -14,13 +14,14 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @RequiredArgsConstructor
-public class OpenRouterClient {
+public class OpenRouterClient implements LlmClient {
 
   private static final String OPEN_ROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 
   private final RestClient restClient;
   private final Secrets.OpenRouter secrets;
 
+  @Override
   public @NonNull Map<String, Object> buildRequest(String prompt, Object jsonSchema) {
     return Map.of(
         "model", "openai/gpt-4.1-mini",
@@ -41,7 +42,8 @@ public class OpenRouterClient {
     );
   }
 
-  public @Nullable OpenRouterResponse call(Map<String, Object> requestBody) {
+  @Override
+  public OpenRouterResponse call(Map<String, Object> requestBody) {
     return restClient.post()
         .uri(OPEN_ROUTER_URL)
         .header(AUTHORIZATION, "Bearer " + secrets.getApiKey())

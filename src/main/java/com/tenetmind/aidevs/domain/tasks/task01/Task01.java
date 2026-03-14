@@ -27,7 +27,7 @@ public class Task01 implements Task {
   private final ObjectMapper mapper = new ObjectMapper();
 
   @Override
-  public Object getAnswer() {
+  public Object solve() {
     DataFrame src = loadPeople();
 
     DataFrame res = src
@@ -54,14 +54,7 @@ public class Task01 implements Task {
         }).select()
         .cols("name", "surname", "gender", "born", "city", "tags").select();
 
-    var jsonArrayString = Json.saver().saveToString(res);
-
-    try {
-      return mapper.readValue(jsonArrayString, new TypeReference<>() {
-      });
-    } catch (Exception e) {
-      throw new RuntimeException("Error parsing JSON array", e);
-    }
+    return convertToObject(res);
   }
 
   private static DataFrame loadPeople() {
@@ -76,6 +69,17 @@ public class Task01 implements Task {
       return Csv.load(path);
     } catch (Exception e) {
       throw new RuntimeException("Error reading CSV from classpath", e);
+    }
+  }
+
+  private Object convertToObject(DataFrame res) {
+    var jsonArrayString = Json.saver().saveToString(res);
+
+    try {
+      return mapper.readValue(jsonArrayString, new TypeReference<>() {
+      });
+    } catch (Exception e) {
+      throw new RuntimeException("Error parsing JSON array", e);
     }
   }
 
