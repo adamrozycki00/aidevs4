@@ -1,10 +1,10 @@
-package com.tenetmind.ai.aidevs.tasks.task01.config;
+package com.tenetmind.aidevs.domain.tasks.task01.config;
 
-import com.tenetmind.ai.aidevs.client.OpenRouterClient;
-import com.tenetmind.ai.aidevs.tasks.task01.Task01;
-import com.tenetmind.ai.aidevs.tasks.task01.extractor.AgentExtractor;
-import com.tenetmind.ai.aidevs.tasks.task01.extractor.DummyExtractor;
-import com.tenetmind.ai.aidevs.tasks.task01.extractor.TagExtractor;
+import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
+import com.tenetmind.aidevs.domain.tasks.task01.Task01;
+import com.tenetmind.aidevs.domain.tasks.task01.extractor.AgentExtractor;
+import com.tenetmind.aidevs.domain.tasks.task01.extractor.DummyExtractor;
+import com.tenetmind.aidevs.domain.tasks.task01.extractor.TagExtractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

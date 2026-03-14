@@ -1,8 +1,8 @@
-package com.tenetmind.ai.aidevs.tasks.task01.extractor;
+package com.tenetmind.aidevs.domain.tasks.task01.extractor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tenetmind.ai.aidevs.client.OpenRouterClient;
-import com.tenetmind.ai.aidevs.tasks.task01.Task01;
+import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
+import com.tenetmind.aidevs.domain.tasks.task01.Task01;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +38,7 @@ public class AgentExtractor implements TagExtractor {
   @Override
   public List<String> extract(String text) {
     String prompt = PROMPT.formatted(text, TAGS);
-    Object responseSchema = readJsonSchema(JSON_SCHEMA_PATH);
+    Object responseSchema = readJsonSchema();
     var resp = callOpenRouter(prompt, responseSchema);
     return resp.tags();
   }
@@ -68,8 +68,8 @@ public class AgentExtractor implements TagExtractor {
     }
   }
 
-  private static Object readJsonSchema(String path) {
-    URL resource = Task01.class.getClassLoader().getResource(path);
+  private static Object readJsonSchema() {
+    URL resource = Task01.class.getClassLoader().getResource(JSON_SCHEMA_PATH);
 
     if (resource == null) {
       throw new IllegalStateException("search.json resource not found on classpath");

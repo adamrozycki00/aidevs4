@@ -1,4 +1,4 @@
-package com.tenetmind.ai.aidevs.config;
+package com.tenetmind.aidevs.infra.config;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

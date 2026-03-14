@@ -1,4 +1,4 @@
-package com.tenetmind.ai.aidevs.sender;
+package com.tenetmind.aidevs.infra.client.brave;
 
 import lombok.Builder;
 

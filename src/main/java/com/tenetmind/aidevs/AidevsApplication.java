@@ -1,7 +1,7 @@
-package com.tenetmind.ai.aidevs;
+package com.tenetmind.aidevs;
 
-import com.tenetmind.ai.aidevs.sender.AnswerSender;
-import com.tenetmind.ai.aidevs.tasks.task01.Task01;
+import com.tenetmind.aidevs.domain.tasks.task01.Task01;
+import com.tenetmind.aidevs.infra.client.brave.AnswerSender;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;

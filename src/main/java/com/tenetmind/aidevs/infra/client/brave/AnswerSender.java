@@ -1,6 +1,6 @@
-package com.tenetmind.ai.aidevs.sender;
+package com.tenetmind.aidevs.infra.client.brave;
 
-import com.tenetmind.ai.aidevs.config.Secrets;
+import com.tenetmind.aidevs.infra.config.Secrets;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.client.RestClient;
 

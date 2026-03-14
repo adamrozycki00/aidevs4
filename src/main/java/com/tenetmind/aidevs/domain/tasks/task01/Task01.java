@@ -1,9 +1,9 @@
-package com.tenetmind.ai.aidevs.tasks.task01;
+package com.tenetmind.aidevs.domain.tasks.task01;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tenetmind.ai.aidevs.tasks.Task;
-import com.tenetmind.ai.aidevs.tasks.task01.extractor.TagExtractor;
+import com.tenetmind.aidevs.domain.tasks.Task;
+import com.tenetmind.aidevs.domain.tasks.task01.extractor.TagExtractor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.dflib.DataFrame;

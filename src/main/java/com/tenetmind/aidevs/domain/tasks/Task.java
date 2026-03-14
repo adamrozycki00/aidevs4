@@ -1,4 +1,4 @@
-package com.tenetmind.ai.aidevs.tasks;
+package com.tenetmind.aidevs.domain.tasks;
 
 public interface Task {
 

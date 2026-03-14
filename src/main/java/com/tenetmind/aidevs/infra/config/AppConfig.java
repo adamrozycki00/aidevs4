@@ -1,7 +1,7 @@
-package com.tenetmind.ai.aidevs.config;
+package com.tenetmind.aidevs.infra.config;
 
-import com.tenetmind.ai.aidevs.client.OpenRouterClient;
-import com.tenetmind.ai.aidevs.sender.AnswerSender;
+import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
+import com.tenetmind.aidevs.infra.client.brave.AnswerSender;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
