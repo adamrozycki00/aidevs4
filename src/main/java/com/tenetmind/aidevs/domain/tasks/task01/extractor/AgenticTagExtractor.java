@@ -18,7 +18,7 @@ import static java.util.Objects.isNull;
 
 @Slf4j
 @RequiredArgsConstructor
-public class AgentExtractor implements TagExtractor {
+public class AgenticTagExtractor implements TagExtractor {
 
   private static final List<String> TAGS = List.of("IT", "transport", "edukacja", "medycyna", "praca z ludźmi", "praca z pojazdami", "praca fizyczna");
   private static final String JSON_SCHEMA_PATH = "tags.json";

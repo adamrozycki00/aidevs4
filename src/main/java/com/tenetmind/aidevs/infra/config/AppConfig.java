@@ -1,16 +1,40 @@
 package com.tenetmind.aidevs.infra.config;
 
+import com.tenetmind.aidevs.domain.TaskFacade;
 import com.tenetmind.aidevs.domain.ports.AnswerSender;
 import com.tenetmind.aidevs.domain.ports.LlmClient;
+import com.tenetmind.aidevs.domain.tasks.Task;
+import com.tenetmind.aidevs.domain.tasks.Tasks;
 import com.tenetmind.aidevs.infra.client.brave.BraveClient;
 import com.tenetmind.aidevs.infra.client.openrouter.OpenRouterClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.client.RestClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
+@Import(TaskBeans.class)
 public class AppConfig {
+
+  @Autowired
+  ApplicationContext ctx;
+
+  @Bean
+  public Tasks tasks() {
+    List<Task> allTasks = new ArrayList<>(ctx.getBeansOfType(Task.class).values());
+    return new Tasks(allTasks);
+  }
+
+  @Bean
+  public TaskFacade taskFacade() {
+    return new TaskFacade(answerSender(), tasks());
+  }
 
   @Bean
   @ConfigurationProperties("secrets")

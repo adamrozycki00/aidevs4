@@ -4,7 +4,7 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-public class DummyExtractor implements TagExtractor {
+public class DummyTagExtractor implements TagExtractor {
 
   @Override
   public List<String> extract(String text) {

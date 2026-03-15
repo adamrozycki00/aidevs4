@@ -4,8 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenetmind.aidevs.domain.tasks.Task;
 import com.tenetmind.aidevs.domain.tasks.task01.extractor.TagExtractor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.dflib.DataFrame;
 import org.dflib.csv.Csv;
 import org.dflib.json.Json;
@@ -14,17 +12,20 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
 
+import static com.tenetmind.aidevs.domain.tasks.Tasks.TaskName.PEOPLE;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.dflib.Exp.$str;
 
-@RequiredArgsConstructor
-public class Task01 implements Task {
+public class Task01 extends Task {
 
-  @Getter
-  private final String name = "people";
   private final TagExtractor tagExtractor;
   private final ObjectMapper mapper = new ObjectMapper();
+
+  public Task01(TagExtractor tagExtractor) {
+    super(PEOPLE);
+    this.tagExtractor = tagExtractor;
+  }
 
   @Override
   public Object solve() {

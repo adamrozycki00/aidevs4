@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.task01.domain.tasks.task01;
 
 import com.tenetmind.aidevs.domain.tasks.task01.Task01;
-import com.tenetmind.aidevs.domain.tasks.task01.extractor.DummyExtractor;
+import com.tenetmind.aidevs.domain.tasks.task01.extractor.DummyTagExtractor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,7 +14,7 @@ class Task01Test {
   @Test
   void shouldGetCorrectAnswerForDummyExtractor() {
     // given Task 01 with DummyExtractor, which always returns "transport" tag for any input
-    Task01 task01 = new Task01(new DummyExtractor());
+    Task01 task01 = new Task01(new DummyTagExtractor());
 
     // when
     var answer = (List<Object>) task01.solve();
