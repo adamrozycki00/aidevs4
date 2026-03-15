@@ -21,7 +21,7 @@ public abstract class Task {
     return "Task{" +
         "name=" + name +
         ", answer=" + answer +
-        ", senderName=" + getVerifierName() +
+        ", verifierName=" + getVerifierName() +
         '}';
   }
 }
