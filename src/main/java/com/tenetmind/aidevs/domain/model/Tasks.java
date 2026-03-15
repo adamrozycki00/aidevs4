@@ -1,4 +1,4 @@
-package com.tenetmind.aidevs.domain.tasks;
+package com.tenetmind.aidevs.domain.model;
 
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;

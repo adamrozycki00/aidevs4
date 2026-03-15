@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.infra.client.brave;
 
 import com.tenetmind.aidevs.domain.ports.AnswerSender;
-import com.tenetmind.aidevs.domain.tasks.Task;
+import com.tenetmind.aidevs.domain.model.Task;
 import com.tenetmind.aidevs.infra.config.Secrets;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.client.RestClient;
@@ -15,11 +15,11 @@ public class BraveClient implements AnswerSender {
   private final Secrets.Brave secrets;
 
   @Override
-  public AnswerSender.Response send(Task task, Object answer) {
+  public AnswerSender.Response send(Task task) {
     var request = AnswerRequest.builder()
         .apikey(secrets.getApiKey())
         .task(task.getSenderName())
-        .answer(answer)
+        .answer(task.getAnswer())
         .build();
 
     var resp = restClient.post()

@@ -1,8 +1,8 @@
-package com.tenetmind.aidevs.domain.tasks.task01.extractor;
+package com.tenetmind.aidevs.domain.model.task01.extractor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenetmind.aidevs.domain.model.task01.Task01;
 import com.tenetmind.aidevs.domain.ports.LlmClient;
-import com.tenetmind.aidevs.domain.tasks.task01.Task01;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,13 +12,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Map;
-
-import static java.util.Objects.isNull;
 
 @Slf4j
 @RequiredArgsConstructor
-public class AgenticTagExtractor implements TagExtractor {
+public class LlmTagExtractor implements TagExtractor {
 
   private static final List<String> TAGS = List.of("IT", "transport", "edukacja", "medycyna", "praca z ludźmi", "praca z pojazdami", "praca fizyczna");
   private static final String JSON_SCHEMA_PATH = "tags.json";
@@ -38,39 +35,35 @@ public class AgenticTagExtractor implements TagExtractor {
   @Override
   public List<String> extract(String text) {
     String prompt = PROMPT.formatted(text, TAGS);
-    Object responseSchema = readJsonSchema();
-    var resp = callOpenRouter(prompt, responseSchema);
+    var responseSchema = readJsonSchema();
+    var resp = callLlm(prompt, responseSchema);
     return resp.tags();
   }
 
-  private TagsResponse callOpenRouter(String prompt, Object jsonSchema) {
-    Map<String, Object> requestBody = client.buildRequest(prompt, jsonSchema);
+  private TagsResponse callLlm(String prompt, Object jsonSchema) {
+    var requestBody = client.buildRequest(prompt, jsonSchema);
     log.info("Calling OpenRouter with request body: {}", requestBody);
 
-    OpenRouterResponse response = client.call(requestBody);
+    LlmResponse response = client.call(requestBody);
     log.info("OpenRouter full response: {}", response);
 
-    if (isNull(response) || response.choices().isEmpty()) {
-      throw new IllegalStateException("Empty response from OpenRouter");
-    }
-
-    String content = response.choices().getFirst().message().content();
+    String content = response.getContent();
     log.info("Response content: {}", content);
 
-    return mapToTagResponse(content);
+    return toTagsResponse(content);
   }
 
-  private TagsResponse mapToTagResponse(String content) {
+  private TagsResponse toTagsResponse(String content) {
     try {
       return mapper.readValue(content, TagsResponse.class);
     } catch (Exception e) {
-      throw new IllegalStateException("Model output is not valid TagsResponse JSON: " + content, e);
+      throw new IllegalStateException(
+          "Model output did not contain a valid " + TagsResponse.class.getSimpleName() + ": " + content, e);
     }
   }
 
-  private static Object readJsonSchema() {
+  private Object readJsonSchema() {
     URL resource = Task01.class.getClassLoader().getResource(JSON_SCHEMA_PATH);
-
     if (resource == null) {
       throw new IllegalStateException("search.json resource not found on classpath");
     }
@@ -79,7 +72,7 @@ public class AgenticTagExtractor implements TagExtractor {
       String readString = Files.readString(Path.of(resource.toURI()));
 
       try {
-        return new ObjectMapper().readValue(readString, Object.class);
+        return mapper.readValue(readString, Object.class);
       } catch (Exception e) {
         throw new IllegalStateException("Invalid JSON schema: " + readString, e);
       }

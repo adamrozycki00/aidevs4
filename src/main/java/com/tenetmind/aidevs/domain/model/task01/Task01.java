@@ -1,9 +1,9 @@
-package com.tenetmind.aidevs.domain.tasks.task01;
+package com.tenetmind.aidevs.domain.model.task01;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tenetmind.aidevs.domain.tasks.Task;
-import com.tenetmind.aidevs.domain.tasks.task01.extractor.TagExtractor;
+import com.tenetmind.aidevs.domain.model.Task;
+import com.tenetmind.aidevs.domain.model.task01.extractor.TagExtractor;
 import org.dflib.DataFrame;
 import org.dflib.csv.Csv;
 import org.dflib.json.Json;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.List;
 
-import static com.tenetmind.aidevs.domain.tasks.Tasks.TaskName.PEOPLE;
+import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.PEOPLE;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.dflib.Exp.$str;
@@ -28,7 +28,7 @@ public class Task01 extends Task {
   }
 
   @Override
-  public Object solve() {
+  public void solve() {
     DataFrame src = loadPeople();
 
     DataFrame res = src
@@ -55,7 +55,7 @@ public class Task01 extends Task {
         }).select()
         .cols("name", "surname", "gender", "born", "city", "tags").select();
 
-    return convertToObject(res);
+    answer = convertToObject(res);
   }
 
   private static DataFrame loadPeople() {

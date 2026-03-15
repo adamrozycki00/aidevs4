@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.task01.domain.tasks.task01;
 
-import com.tenetmind.aidevs.domain.tasks.task01.Task01;
-import com.tenetmind.aidevs.domain.tasks.task01.extractor.DummyTagExtractor;
+import com.tenetmind.aidevs.domain.model.task01.Task01;
+import com.tenetmind.aidevs.domain.model.task01.extractor.DummyTagExtractor;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,13 +13,18 @@ class Task01Test {
 
   @Test
   void shouldGetCorrectAnswerForDummyExtractor() {
-    // given Task 01 with DummyExtractor, which always returns "transport" tag for any input
-    Task01 task01 = new Task01(new DummyTagExtractor());
+    // given a DummyTagExtractor that returns the "transport" tag for any input
+    var dummyExtractor = new DummyTagExtractor();
+    // and a Task01 instance that selects people fulfilling certain criteria from a file,
+    // which contains 31 people that meet the criteria when the "transport" tag is ignored
+    Task01 task01 = new Task01(dummyExtractor);
+    int expectedPeopleCount = 31;
 
     // when
-    var answer = (List<Object>) task01.solve();
+    task01.solve();
 
-    // then the answer should contain 31 people that fulfill all criteria ignoring the "transport" tag
-    assertThat(answer).hasSize(31);
+    // then the answer should contain all people that meet the criteria when the "transport" tag is ignored
+    var answer = (List<Object>) task01.getAnswer();
+    assertThat(answer).hasSize(expectedPeopleCount);
   }
 }

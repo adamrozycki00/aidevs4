@@ -9,9 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-import java.util.List;
-
-import static com.tenetmind.aidevs.domain.tasks.Tasks.TaskName.PEOPLE;
+import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.PEOPLE;
 import static org.springframework.boot.WebApplicationType.NONE;
 
 @SpringBootApplication
@@ -28,7 +26,8 @@ public class AidevsApplication implements ApplicationRunner {
 
   @Override
   public void run(@NonNull ApplicationArguments args) {
-    var responses = taskFacade.solveByName(List.of(PEOPLE));
-    responses.forEach(IO::println);
+    taskFacade.solveByName(PEOPLE);
+    var response = taskFacade.sendAnswerByName(PEOPLE);
+    IO.println(response);
   }
 }

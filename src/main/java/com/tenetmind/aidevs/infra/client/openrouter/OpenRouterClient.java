@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.infra.client.openrouter;
 
 import com.tenetmind.aidevs.domain.ports.LlmClient;
-import com.tenetmind.aidevs.domain.tasks.task01.extractor.OpenRouterResponse;
+import com.tenetmind.aidevs.domain.model.task01.extractor.LlmResponse;
 import com.tenetmind.aidevs.infra.config.Secrets;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
@@ -10,6 +10,7 @@ import org.springframework.web.client.RestClient;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Objects.isNull;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -43,14 +44,20 @@ public class OpenRouterClient implements LlmClient {
   }
 
   @Override
-  public OpenRouterResponse call(Map<String, Object> requestBody) {
-    return restClient.post()
+  public @NonNull LlmResponse call(Map<String, Object> requestBody) {
+    var resp = restClient.post()
         .uri(OPEN_ROUTER_URL)
         .header(AUTHORIZATION, "Bearer " + secrets.getApiKey())
         .contentType(APPLICATION_JSON)
         .accept(APPLICATION_JSON)
         .body(requestBody)
         .retrieve()
-        .body(OpenRouterResponse.class);
+        .body(LlmResponse.class);
+
+    if (isNull(resp)) {
+      throw new IllegalStateException("OpenRouter response is null");
+    }
+
+    return resp;
   }
 }

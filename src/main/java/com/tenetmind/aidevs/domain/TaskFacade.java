@@ -1,33 +1,30 @@
 package com.tenetmind.aidevs.domain;
 
+import com.tenetmind.aidevs.domain.model.Tasks;
 import com.tenetmind.aidevs.domain.ports.AnswerSender;
-import com.tenetmind.aidevs.domain.tasks.Task;
-import com.tenetmind.aidevs.domain.tasks.Tasks;
 import lombok.RequiredArgsConstructor;
 
-import java.util.List;
-
-import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
 
 @RequiredArgsConstructor
 public class TaskFacade {
 
-  private final AnswerSender answerSender;
   private final Tasks tasks;
+  private final AnswerSender answerSender;
 
-  public List<AnswerSender.Response> solveByName(List<Tasks.TaskName> taskNames) {
-    return taskNames.stream()
-        .map(tasks::getByName)
-        .map(this::solveAndSendAnswer)
-        .toList();
+  public void solveAll() {
+    var allTaskNames = Tasks.TaskName.values();
+    stream(allTaskNames)
+        .forEach(this::solveByName);
   }
 
-  public List<AnswerSender.Response> solveAll() {
-    return solveByName(asList(Tasks.TaskName.values()));
+  public void solveByName(Tasks.TaskName taskName) {
+    var task = tasks.getByName(taskName);
+    task.solve();
   }
 
-  private AnswerSender.Response solveAndSendAnswer(Task task) {
-    var answer = task.solve();
-    return answerSender.send(task, answer);
+  public AnswerSender.Response sendAnswerByName(Tasks.TaskName taskName) {
+    var task = tasks.getByName(taskName);
+    return answerSender.send(task);
   }
 }

@@ -1,4 +1,4 @@
-package com.tenetmind.aidevs.domain.tasks.task01.extractor;
+package com.tenetmind.aidevs.domain.model.task01.extractor;
 
 import java.util.List;
 

@@ -1,15 +1,16 @@
-package com.tenetmind.aidevs.domain.tasks;
+package com.tenetmind.aidevs.domain.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Getter
 @RequiredArgsConstructor
 public abstract class Task {
 
-  @Getter
   protected final Tasks.TaskName name;
+  protected Object answer;
 
-  public abstract Object solve();
+  public abstract void solve();
 
   public String getSenderName() {
     return name.name().toLowerCase();
