@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.infra.config;
 
 import com.tenetmind.aidevs.domain.TaskFacade;
-import com.tenetmind.aidevs.domain.ports.AnswerSender;
+import com.tenetmind.aidevs.domain.ports.AnswerVerifier;
 import com.tenetmind.aidevs.domain.ports.LlmClient;
 import com.tenetmind.aidevs.domain.model.Task;
 import com.tenetmind.aidevs.domain.model.Tasks;
@@ -33,7 +33,7 @@ public class AppConfig {
 
   @Bean
   public TaskFacade taskFacade() {
-    return new TaskFacade(answerSender(), tasks());
+    return new TaskFacade(tasks(), answerVerifier());
   }
 
   @Bean
@@ -53,7 +53,7 @@ public class AppConfig {
   }
 
   @Bean
-  public AnswerSender answerSender() {
+  public AnswerVerifier answerVerifier() {
     return new BraveClient(restClient(), secrets().getBrave());
   }
 }

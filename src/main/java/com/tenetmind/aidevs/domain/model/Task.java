@@ -15,4 +15,13 @@ public abstract class Task {
   public String getSenderName() {
     return name.name().toLowerCase();
   }
+
+  @Override
+  public String toString() {
+    return "Task{" +
+        "name=" + name +
+        ", answer=" + answer +
+        ", senderName=" + getSenderName() +
+        '}';
+  }
 }
