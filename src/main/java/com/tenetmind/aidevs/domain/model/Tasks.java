@@ -1,5 +1,6 @@
 package com.tenetmind.aidevs.domain.model;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.jspecify.annotations.NonNull;
 
@@ -22,7 +23,11 @@ public class Tasks {
     return task -> task.getName() == name;
   }
 
+  @Getter
+  @RequiredArgsConstructor
   public enum TaskName {
-    PEOPLE
+    PEOPLE("people");
+
+    private final String verifierName;
   }
 }

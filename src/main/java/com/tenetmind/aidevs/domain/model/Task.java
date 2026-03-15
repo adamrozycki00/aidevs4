@@ -12,8 +12,8 @@ public abstract class Task {
 
   public abstract void solve();
 
-  public String getSenderName() {
-    return name.name().toLowerCase();
+  public String getVerifierName() {
+    return name.getVerifierName();
   }
 
   @Override
@@ -21,7 +21,7 @@ public abstract class Task {
     return "Task{" +
         "name=" + name +
         ", answer=" + answer +
-        ", senderName=" + getSenderName() +
+        ", senderName=" + getVerifierName() +
         '}';
   }
 }

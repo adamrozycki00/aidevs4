@@ -18,7 +18,7 @@ public class BraveClient implements AnswerVerifier {
   public AnswerVerifier.Response verify(Task task) {
     var request = AnswerRequest.builder()
         .apikey(secrets.getApiKey())
-        .task(task.getSenderName())
+        .task(task.getVerifierName())
         .answer(task.getAnswer())
         .build();
 
