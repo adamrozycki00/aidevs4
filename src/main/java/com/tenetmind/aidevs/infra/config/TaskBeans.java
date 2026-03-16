@@ -1,6 +1,6 @@
 package com.tenetmind.aidevs.infra.config;
 
-import com.tenetmind.aidevs.domain.ports.LlmClient;
+import com.tenetmind.aidevs.domain.ports.out.LlmClient;
 import com.tenetmind.aidevs.domain.model.task01.Task01;
 import com.tenetmind.aidevs.domain.model.task01.extractor.LlmTagExtractor;
 import org.springframework.beans.factory.annotation.Autowired;

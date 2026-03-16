@@ -1,6 +1,6 @@
 package com.tenetmind.aidevs.infra.client.openrouter;
 
-import com.tenetmind.aidevs.domain.ports.LlmClient;
+import com.tenetmind.aidevs.domain.ports.out.LlmClient;
 import com.tenetmind.aidevs.domain.model.task01.extractor.LlmResponse;
 import com.tenetmind.aidevs.infra.config.Secrets;
 import lombok.RequiredArgsConstructor;

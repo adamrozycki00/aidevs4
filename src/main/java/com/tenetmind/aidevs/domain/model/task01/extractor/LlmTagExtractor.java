@@ -2,7 +2,7 @@ package com.tenetmind.aidevs.domain.model.task01.extractor;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenetmind.aidevs.domain.model.task01.Task01;
-import com.tenetmind.aidevs.domain.ports.LlmClient;
+import com.tenetmind.aidevs.domain.ports.out.LlmClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.tenetmind.aidevs.domain.ports;
+package com.tenetmind.aidevs.domain.ports.out;
 
 import com.tenetmind.aidevs.domain.model.Task;
 import com.tenetmind.aidevs.domain.model.Tasks;

@@ -1,7 +1,7 @@
 package com.tenetmind.aidevs.domain;
 
 import com.tenetmind.aidevs.domain.model.Tasks;
-import com.tenetmind.aidevs.domain.ports.AnswerVerifier;
+import com.tenetmind.aidevs.domain.ports.out.AnswerVerifier;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

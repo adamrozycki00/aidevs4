@@ -1,6 +1,6 @@
 package com.tenetmind.aidevs.infra.client.brave;
 
-import com.tenetmind.aidevs.domain.ports.AnswerVerifier;
+import com.tenetmind.aidevs.domain.ports.out.AnswerVerifier;
 import com.tenetmind.aidevs.domain.model.Task;
 import com.tenetmind.aidevs.infra.config.Secrets;
 import lombok.RequiredArgsConstructor;
