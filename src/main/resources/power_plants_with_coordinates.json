@@ -1,0 +1,44 @@
+{
+  "Zabrze": {
+    "lat": 50.2956,
+    "lon": 18.8099,
+    "code": "PWR3847PL",
+    "source_note": "EC Zabrze (heat & power plant)"
+  },
+  "Piotrków Trybunalski": {
+    "lat": 51.4066,
+    "lon": 19.6897,
+    "code": "PWR5921PL",
+    "source_note": "Elektrociepłownia Piotrków Trybunalski (Rolnicza 75, approximated from map)"
+  },
+  "Grudziądz": {
+    "lat": 53.48375,
+    "lon": 18.75356,
+    "code": "PWR7264PL",
+    "source_note": "Grudziądz power station (project-level coordinates)"
+  },
+  "Tczew": {
+    "lat": 54.0924,
+    "lon": 18.7779,
+    "code": "PWR1593PL",
+    "source_note": "Local CHP / industrial plant area (approximate – no single dominant plant dataset)"
+  },
+  "Radom": {
+    "lat": 51.3890,
+    "lon": 21.1486,
+    "code": "PWR8406PL",
+    "source_note": "Radom CHP (approximate industrial location)"
+  },
+  "Chelmno": {
+    "lat": 53.3485,
+    "lon": 18.4256,
+    "code": "PWR2758PL",
+    "source_note": "Chełmno energy/industrial plant area (approximate)"
+  },
+  "Żarnowiec": {
+    "lat": 54.7447,
+    "lon": 18.0867,
+    "code": "PWR6132PL",
+    "source_note": "Żarnowiec pumped-storage power station (Czymanowo area)"
+  }
+}

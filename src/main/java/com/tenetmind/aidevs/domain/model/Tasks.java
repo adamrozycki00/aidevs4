@@ -26,7 +26,8 @@ public class Tasks {
   @Getter
   @RequiredArgsConstructor
   public enum TaskName {
-    PEOPLE("people");
+    PEOPLE("people"),
+    FIND_HIM("findhim");
 
     private final String verifierName;
   }

@@ -3,6 +3,9 @@ package com.tenetmind.aidevs.infra.config;
 import com.tenetmind.aidevs.domain.TaskFacade;
 import com.tenetmind.aidevs.domain.model.Task;
 import com.tenetmind.aidevs.domain.model.Tasks;
+import com.tenetmind.aidevs.domain.model.task02.tools.ToolFactory;
+import com.tenetmind.aidevs.domain.model.task02.tools.Toolbox;
+import com.tenetmind.aidevs.domain.ports.out.ApiCaller;
 import com.tenetmind.aidevs.domain.ports.out.AnswerVerifier;
 import com.tenetmind.aidevs.domain.ports.out.LlmClient;
 import com.tenetmind.aidevs.infra.client.brave.BraveClient;
@@ -54,5 +57,20 @@ public class AppConfig {
   @Bean
   public AnswerVerifier answerVerifier() {
     return new BraveClient(restClient(), secrets().getBrave());
+  }
+
+  @Bean
+  public ApiCaller apiCaller() {
+    return new BraveClient(restClient(), secrets().getBrave());
+  }
+
+  @Bean
+  public ToolFactory toolFactory() {
+    return new ToolFactory(apiCaller());
+  }
+
+  @Bean
+  public Toolbox tools() {
+    return new Toolbox(toolFactory());
   }
 }

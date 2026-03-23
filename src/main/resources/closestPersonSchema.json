@@ -1,0 +1,34 @@
+{
+  "type": "object",
+  "description": "Information about a person that were seen very close to a power plant.",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Person's first name."
+    },
+    "surname": {
+      "type": "string",
+      "description": "Person's surname."
+    },
+    "accessLevel": {
+      "type": "number",
+      "description": "Person's access level to power plants."
+    },
+    "powerPlant": {
+      "type": "string",
+      "description": "Code of the power plant that the person was seen close to, e.g. PWR0000PL."
+    },
+    "distance": {
+      "type": "number",
+      "description": "The closest distance between the person and the power plant in meters."
+    }
+  },
+  "required": [
+    "name",
+    "surname",
+    "accessLevel",
+    "powerPlant",
+    "distance"
+  ],
+  "additionalProperties": false
+}

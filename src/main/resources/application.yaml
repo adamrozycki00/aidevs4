@@ -2,7 +2,7 @@ spring.application.name: aidevs
 
 secrets:
   open-router:
-    api-key: "api_key"
+    api-key: ""
   brave:
-    api-key: "api_key"
-    url: "url"
+    api-key: ""
+    base-url: ""

@@ -10,7 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
-import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.PEOPLE;
+import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.FIND_HIM;
 import static org.springframework.boot.WebApplicationType.NONE;
 
 @Slf4j
@@ -29,8 +29,8 @@ public class AidevsApplication implements ApplicationRunner {
 
   @Override
   public void run(@NonNull ApplicationArguments args) {
-    taskFacade.solveByName(PEOPLE);
-    var response = taskFacade.verifyAnswerByName(PEOPLE);
+    taskFacade.solveByName(FIND_HIM);
+    var response = taskFacade.verifyAnswerByName(FIND_HIM);
 
     log.info("Verifier response:\n{}", response);
   }

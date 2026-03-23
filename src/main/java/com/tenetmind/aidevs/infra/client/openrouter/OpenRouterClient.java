@@ -1,9 +1,16 @@
 package com.tenetmind.aidevs.infra.client.openrouter;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.tenetmind.aidevs.domain.ports.out.LlmClient;
-import com.tenetmind.aidevs.domain.model.task01.extractor.LlmResponse;
+import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
+import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionResponse;
+import com.tenetmind.aidevs.domain.model.llmchat.Message;
 import com.tenetmind.aidevs.infra.config.Secrets;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.springframework.web.client.RestClient;
 
@@ -11,9 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.Objects.isNull;
+import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
+@Slf4j
 @RequiredArgsConstructor
 public class OpenRouterClient implements LlmClient {
 
@@ -21,30 +30,40 @@ public class OpenRouterClient implements LlmClient {
 
   private final RestClient restClient;
   private final Secrets.OpenRouter secrets;
+  private final ObjectMapper objectMapper = new ObjectMapper();
 
-  @Override
-  public @NonNull Map<String, Object> buildRequest(String prompt, Object jsonSchema) {
-    return Map.of(
-        "model", "openai/gpt-4.1-mini",
-        "messages", List.of(
-            Map.of(
-                "role", "user",
-                "content", prompt
-            )
-        ),
-        "response_format", Map.of(
-            "type", "json_schema",
-            "json_schema", Map.of(
-                "name", "structured_response",
-                "strict", true,
-                "schema", jsonSchema
-            )
-        )
+  {
+    objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    objectMapper.setDefaultPropertyInclusion(
+        JsonInclude.Value.construct(JsonInclude.Include.NON_NULL, JsonInclude.Include.NON_NULL)
     );
   }
 
   @Override
-  public @NonNull LlmResponse call(Map<String, Object> requestBody) {
+  public @NonNull Map<String, Object> buildRequest(String model, String prompt, Object jsonSchema, List<Message.ToolCall> toolCalls,
+                                                   String toolCallId, List<ChatCompletionRequest.Tool> tools) {
+    var responseFormat = nonNull(jsonSchema) ?
+        new ChatCompletionRequest.ResponseFormat(
+        new ChatCompletionRequest.JsonSchema(
+            "structured_response",
+            true,
+            jsonSchema
+        )) : null;
+    
+    var request = new ChatCompletionRequest(
+        model,
+        List.of(new Message("user", prompt, toolCalls, toolCallId)),
+        1.0,
+        tools,
+        responseFormat
+    );
+
+    return objectMapper.convertValue(request, new TypeReference<>() {});
+  }
+
+  @Override
+  public @NonNull ChatCompletionResponse call(Map<String, Object> requestBody) {
+    log.info("Calling OpenRouter API with request body: {}", requestBody);
     var resp = restClient.post()
         .uri(OPEN_ROUTER_URL)
         .header(AUTHORIZATION, "Bearer " + secrets.getApiKey())
@@ -52,7 +71,9 @@ public class OpenRouterClient implements LlmClient {
         .accept(APPLICATION_JSON)
         .body(requestBody)
         .retrieve()
-        .body(LlmResponse.class);
+        .body(ChatCompletionResponse.class);
+    
+    log.info("OpenRouter API response: {}", resp);
 
     if (isNull(resp)) {
       throw new IllegalStateException("OpenRouter response is null");

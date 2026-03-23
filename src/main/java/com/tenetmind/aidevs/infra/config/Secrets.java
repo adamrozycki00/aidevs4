@@ -20,6 +20,6 @@ public class Secrets {
   @Data
   public static class Brave {
     private  String apiKey;
-    private String url;
+    private String baseUrl;
   }
 }
