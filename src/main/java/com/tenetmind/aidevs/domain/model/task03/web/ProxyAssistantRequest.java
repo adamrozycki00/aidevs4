@@ -1,3 +1,3 @@
-package com.tenetmind.aidevs.task03.web;
+package com.tenetmind.aidevs.domain.model.task03.web;
 
 public record ProxyAssistantRequest(String sessionID, String msg) {}

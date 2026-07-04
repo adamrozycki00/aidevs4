@@ -1,4 +1,4 @@
-package com.tenetmind.aidevs.task03.web;
+package com.tenetmind.aidevs.domain.model.task03.web;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.web.bind.annotation.PostMapping;
