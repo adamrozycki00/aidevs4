@@ -1,5 +1,7 @@
 spring.application.name: aidevs
 
+task-mode: true
+
 secrets:
   open-router:
     api-key: ""
