@@ -18,6 +18,6 @@ public class TaskBeans {
 
   @Bean
   public Task02 task02() {
-    return new Task02(tools, llmClient, 40);
+    return new Task02(tools, llmClient, 100);
   }
 }

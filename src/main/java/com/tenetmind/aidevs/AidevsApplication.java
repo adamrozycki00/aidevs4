@@ -20,7 +20,7 @@ public class AidevsApplication implements ApplicationRunner {
   @Autowired
   private TaskFacade taskFacade;
 
-  static void main(String[] args) {
+  public static void main(String[] args) {
     var ctx = new SpringApplicationBuilder(AidevsApplication.class).web(NONE).run(args);
     int exitCode = SpringApplication.exit(ctx);
 

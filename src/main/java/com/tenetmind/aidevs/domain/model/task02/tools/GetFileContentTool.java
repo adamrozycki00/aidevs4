@@ -18,7 +18,7 @@ import static java.util.Objects.isNull;
 @Slf4j
 public class GetFileContentTool implements Toolbox.Tool {
   
-  private static final String BASE_DIR = "/Users/arozycki/Dev/aidevs/task2";
+  private static final String BASE_DIR = "/Users/adam.rozycki/Dev/aidevs/task2";
 
   @Override
   public String execute(Message.ToolCall toolCall) {

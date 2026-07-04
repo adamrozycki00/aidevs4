@@ -27,7 +27,7 @@ public class Task02 extends Task {
   private final Toolbox toolbox;
   private final LlmClient client;
   private final ObjectMapper mapper = new ObjectMapper();
-  private final String model = "openai/gpt-5.2";
+  private final String model = "openai/gpt-5.4";
   private final double temperature = 0.2;
   private final int turnLimit;
 
