@@ -3,7 +3,7 @@ spring.application.name: aidevs
 server:
   port: 3000
 
-task-mode: true
+#task-mode: true
 
 secrets:
   open-router:
