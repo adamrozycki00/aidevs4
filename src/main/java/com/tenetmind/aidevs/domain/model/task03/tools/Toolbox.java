@@ -3,20 +3,24 @@ package com.tenetmind.aidevs.domain.model.task03.tools;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenetmind.aidevs.domain.model.llmchat.Message;
-import com.tenetmind.aidevs.domain.model.task02.tools.ToolFactory;
+import com.tenetmind.aidevs.domain.ports.out.ApiCaller;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.Objects.isNull;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class Toolbox {
 
   private final Map<String, Function<Message.ToolCall, String>> executors = new HashMap<>();
 
-  public Toolbox(ToolFactory factory) {
+  public Toolbox(ApiCaller apiCaller) {
+    var checkPackageTool = new CheckPackageTool(apiCaller);
+    var redirectPackageTool = new RedirectPackageTool(apiCaller);
+    executors.put("check_package", checkPackageTool::execute);
+    executors.put("redirect_package", redirectPackageTool::execute);
   }
 
   /**
@@ -40,7 +44,7 @@ public class Toolbox {
   }
 
   public static Map<String, Object> parseArguments(String argumentsJson) {
-    if (isNotBlank(argumentsJson)) {
+    if (isBlank(argumentsJson)) {
       return Map.of();
     }
 
