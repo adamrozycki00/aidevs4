@@ -1,5 +1,10 @@
 spring.application.name: aidevs
 
+server:
+  port: 4791
+
+#task-mode: true
+
 secrets:
   open-router:
     api-key: ""

@@ -1,26 +1,25 @@
 package com.tenetmind.aidevs.domain.model.task02;
 
+import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.FIND_HIM;
+import static com.tenetmind.aidevs.domain.model.llmchat.util.LlmUtil.readJsonSchema;
+import static com.tenetmind.aidevs.domain.model.task02.tools.CalculateDistanceTool.calculateDistanceTool;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetFileContentTool.getFileContentTool;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonAccessLevelTool.getPersonAccessLevelTool;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonLocationsTool.getPersonLocationsTool;
+import static java.util.Objects.nonNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tenetmind.aidevs.domain.model.Task;
 import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
 import com.tenetmind.aidevs.domain.model.llmchat.Message;
-import com.tenetmind.aidevs.domain.model.task02.tools.Toolbox;
+import com.tenetmind.aidevs.domain.model.Toolbox;
 import com.tenetmind.aidevs.domain.ports.out.LlmClient;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.FIND_HIM;
-import static com.tenetmind.aidevs.domain.model.llmchat.util.LlmUtil.readJsonSchema;
-import static com.tenetmind.aidevs.domain.model.task02.tools.CalculateDistanceTool.calculateDistance;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetFileContentTool.getFileContent;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonAccessLevelTool.getPersonAccessLevel;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonLocationsTool.getPersonLocations;
-import static java.util.Objects.nonNull;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Task02 extends Task {
@@ -66,7 +65,7 @@ public class Task02 extends Task {
         .content(prompt)
         .build();
     conversation.add(message);
-    var tools = List.of(getFileContent(), getPersonLocations(), calculateDistance(), getPersonAccessLevel());
+    var tools = List.of(getFileContentTool(), getPersonLocationsTool(), calculateDistanceTool(), getPersonAccessLevelTool());
     var structuredResponse = new ChatCompletionRequest.ResponseFormat(
         new ChatCompletionRequest.JsonSchema(
             "structured_response",

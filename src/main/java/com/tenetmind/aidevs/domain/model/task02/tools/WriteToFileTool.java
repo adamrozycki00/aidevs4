@@ -1,19 +1,17 @@
 package com.tenetmind.aidevs.domain.model.task02.tools;
 
-import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
-import com.tenetmind.aidevs.domain.model.llmchat.Message;
-import lombok.extern.slf4j.Slf4j;
+import static com.tenetmind.aidevs.domain.model.Toolbox.parseArguments;
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Objects.isNull;
 
+import com.tenetmind.aidevs.domain.model.Toolbox;
+import com.tenetmind.aidevs.domain.model.llmchat.Message;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
-
-import static com.tenetmind.aidevs.domain.model.task02.tools.Toolbox.parseArguments;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.Objects.isNull;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class WriteToFileTool implements Toolbox.Tool {
@@ -37,29 +35,6 @@ public class WriteToFileTool implements Toolbox.Tool {
 
     writeToFile(fileName, content);
     return "OK";
-  }
-
-  public static ChatCompletionRequest.Tool writeToFile() {
-    var function = ChatCompletionRequest.Function.builder()
-        .name("write_to_file")
-        .description("Writes a UTF-8 string into a file")
-        .parameters(Map.of(
-            "type", "object",
-            "properties", Map.of(
-                "file_name", Map.of(
-                    "type", "string",
-                    "description", "Name of the file to write"
-                ),
-                "content", Map.of(
-                    "type", "string",
-                    "description", "String content to write"
-                )
-            ),
-            "required", List.of("file_name", "content"),
-            "additionalProperties", false
-        ))
-        .build();
-    return new ChatCompletionRequest.Tool("function", function);
   }
 
   private static void writeToFile(String fileName, String content) {

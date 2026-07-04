@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.List;
 
 import static java.util.Objects.isNull;
-
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

@@ -1,6 +1,7 @@
 package com.tenetmind.aidevs.domain.model.task02.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenetmind.aidevs.domain.model.Toolbox;
 import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
 import com.tenetmind.aidevs.domain.model.llmchat.Message;
 import com.tenetmind.aidevs.domain.ports.out.ApiCaller;
@@ -10,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Map;
 
-import static com.tenetmind.aidevs.domain.model.task02.tools.Toolbox.parseArguments;
+import static com.tenetmind.aidevs.domain.model.Toolbox.parseArguments;
 import static java.util.Objects.isNull;
 
 @Slf4j
@@ -66,7 +67,7 @@ public class GetPersonAccessLevelTool implements Toolbox.Tool {
     }
   }
 
-  public static ChatCompletionRequest.Tool getPersonAccessLevel() {
+  public static ChatCompletionRequest.Tool getPersonAccessLevelTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("get_person_access_level")
         .description("Returns person's access level to power plants: integer 1-10")

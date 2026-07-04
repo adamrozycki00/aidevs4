@@ -1,6 +1,7 @@
 package com.tenetmind.aidevs.domain.model.task02.tools;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tenetmind.aidevs.domain.model.Toolbox;
 import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
 import com.tenetmind.aidevs.domain.model.llmchat.Message;
 import com.tenetmind.aidevs.domain.ports.out.ApiCaller;
@@ -10,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.List;
 import java.util.Map;
 
-import static com.tenetmind.aidevs.domain.model.task02.tools.Toolbox.parseArguments;
+import static com.tenetmind.aidevs.domain.model.Toolbox.parseArguments;
 import static java.util.Objects.isNull;
 
 @Slf4j
@@ -59,7 +60,7 @@ public class GetPersonLocationsTool implements Toolbox.Tool {
     }
   }
 
-  public static ChatCompletionRequest.Tool getPersonLocations() {
+  public static ChatCompletionRequest.Tool getPersonLocationsTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("get_person_locations")
         .description("Returns a JSON array of historical locations for a single person (name + surname) as geographical coordinates: longitude and latitude")

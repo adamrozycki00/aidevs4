@@ -1,7 +1,6 @@
 package com.tenetmind.aidevs.domain.model.llmchat.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tenetmind.aidevs.domain.model.task01.Task01;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,7 +14,7 @@ public class LlmUtil {
 
 
   public static Object readJsonSchema(String path) {
-    URL resource = Task01.class.getClassLoader().getResource(path);
+    URL resource = LlmUtil.class.getClassLoader().getResource(path);
     if (resource == null) {
       throw new IllegalStateException("search.json resource not found on classpath");
     }

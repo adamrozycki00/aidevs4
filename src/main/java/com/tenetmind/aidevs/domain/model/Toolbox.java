@@ -1,4 +1,4 @@
-package com.tenetmind.aidevs.domain.model.task02.tools;
+package com.tenetmind.aidevs.domain.model;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,17 +9,23 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.Objects.isNull;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class Toolbox {
 
   private final Map<String, Function<Message.ToolCall, String>> executors = new HashMap<>();
 
   public Toolbox(ToolFactory factory) {
+    // task02
     executors.put("get_file_content", factory.createGetFileContentTool()::execute);
     executors.put("write_to_file", factory.createWriteToFileTool()::execute);
     executors.put("get_person_locations", factory.createGetPersonLocationsTool()::execute);
     executors.put("calculate_distance", factory.createCalculateDistanceTool()::execute);
     executors.put("get_person_access_level", factory.createGetPersonAccessLevel()::execute);
+
+    // task03
+    executors.put("check_package", factory.checkPackageTool()::execute);
+    executors.put("redirect_package", factory.redirectPackageTool()::execute);
   }
 
   /**
@@ -43,7 +49,7 @@ public class Toolbox {
   }
 
   public static Map<String, Object> parseArguments(String argumentsJson) {
-    if (argumentsJson == null || argumentsJson.isBlank()) {
+    if (isBlank(argumentsJson)) {
       return Map.of();
     }
 
@@ -55,6 +61,7 @@ public class Toolbox {
     }
   }
 
+  @FunctionalInterface
   public interface Tool {
     String execute(Message.ToolCall toolCall);
   }

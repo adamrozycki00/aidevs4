@@ -1,5 +1,6 @@
 package com.tenetmind.aidevs.domain.model.task02.tools;
 
+import com.tenetmind.aidevs.domain.model.Toolbox;
 import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
 import com.tenetmind.aidevs.domain.model.llmchat.Message;
 import lombok.extern.slf4j.Slf4j;
@@ -10,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import static com.tenetmind.aidevs.domain.model.task02.tools.Toolbox.parseArguments;
+import static com.tenetmind.aidevs.domain.model.Toolbox.parseArguments;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.nio.file.Files.*;
 import static java.util.Objects.isNull;
@@ -18,20 +19,22 @@ import static java.util.Objects.isNull;
 @Slf4j
 public class GetFileContentTool implements Toolbox.Tool {
   
-  private static final String BASE_DIR = "/Users/arozycki/Dev/aidevs/task2";
+  private static final String BASE_DIR = "/Users/adam.rozycki/Dev/aidevs/task2";
 
   @Override
   public String execute(Message.ToolCall toolCall) {
     log.info("Executing GetFileContentTool for toolCall {}", toolCall);
-    Map<String, Object> args = parseArguments(toolCall.function().arguments());
+    var args = parseArguments(toolCall.function().arguments());
     Object fileNameRaw = args.get("file_name");
+
     if (!(fileNameRaw instanceof String fileName) || fileName.isBlank()) {
       throw new IllegalArgumentException("Missing/invalid argument 'file_name'");
     }
-    return getFileContent(fileName);
+
+    return getFileContentTool(fileName);
   }
 
-  public static ChatCompletionRequest.Tool getFileContent() {
+  public static ChatCompletionRequest.Tool getFileContentTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("get_file_content")
         .description("Fetches the content of a file given its name, resolved against a configured base directory")
@@ -50,7 +53,7 @@ public class GetFileContentTool implements Toolbox.Tool {
     return new ChatCompletionRequest.Tool("function", function);
   }
 
-  private static String getFileContent(String fileName) {
+  private static String getFileContentTool(String fileName) {
     return getFileContentFromDir(BASE_DIR, fileName);
   }
 
