@@ -39,11 +39,11 @@ public class CalculateDistanceTool implements Toolbox.Tool {
       throw new IllegalArgumentException("Missing/invalid argument 'longitude_2'");
     }
 
-    double distance = calculateDistance(lat1, lon1, lat2, lon2);
+    double distance = calculateDistanceTool(lat1, lon1, lat2, lon2);
     return String.valueOf(Math.round(distance));
   }
 
-  public static ChatCompletionRequest.Tool calculateDistance() {
+  public static ChatCompletionRequest.Tool calculateDistanceTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("calculate_distance")
         .description("Calculates distance in meters between two locations using Haversine formula.")
@@ -77,7 +77,7 @@ public class CalculateDistanceTool implements Toolbox.Tool {
   /**
    * Calculates distance in meters between two locations using Haversine formula.
    */
-  static double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+  static double calculateDistanceTool(double lat1, double lon1, double lat2, double lon2) {
     double lat1Rad = Math.toRadians(lat1);
     double lat2Rad = Math.toRadians(lat2);
     double deltaLat = Math.toRadians(lat2 - lat1);

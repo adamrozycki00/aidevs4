@@ -59,7 +59,7 @@ public class GetPersonLocationsTool implements Toolbox.Tool {
     }
   }
 
-  public static ChatCompletionRequest.Tool getPersonLocations() {
+  public static ChatCompletionRequest.Tool getPersonLocationsTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("get_person_locations")
         .description("Returns a JSON array of historical locations for a single person (name + surname) as geographical coordinates: longitude and latitude")

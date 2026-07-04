@@ -2,10 +2,10 @@ package com.tenetmind.aidevs.domain.model.task02;
 
 import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.FIND_HIM;
 import static com.tenetmind.aidevs.domain.model.llmchat.util.LlmUtil.readJsonSchema;
-import static com.tenetmind.aidevs.domain.model.task02.tools.CalculateDistanceTool.calculateDistance;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetFileContentTool.getFileContent;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonAccessLevelTool.getPersonAccessLevel;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonLocationsTool.getPersonLocations;
+import static com.tenetmind.aidevs.domain.model.task02.tools.CalculateDistanceTool.calculateDistanceTool;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetFileContentTool.getFileContentTool;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonAccessLevelTool.getPersonAccessLevelTool;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonLocationsTool.getPersonLocationsTool;
 import static java.util.Objects.nonNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -65,7 +65,7 @@ public class Task02 extends Task {
         .content(prompt)
         .build();
     conversation.add(message);
-    var tools = List.of(getFileContent(), getPersonLocations(), calculateDistance(), getPersonAccessLevel());
+    var tools = List.of(getFileContentTool(), getPersonLocationsTool(), calculateDistanceTool(), getPersonAccessLevelTool());
     var structuredResponse = new ChatCompletionRequest.ResponseFormat(
         new ChatCompletionRequest.JsonSchema(
             "structured_response",

@@ -23,15 +23,17 @@ public class GetFileContentTool implements Toolbox.Tool {
   @Override
   public String execute(Message.ToolCall toolCall) {
     log.info("Executing GetFileContentTool for toolCall {}", toolCall);
-    Map<String, Object> args = parseArguments(toolCall.function().arguments());
+    var args = parseArguments(toolCall.function().arguments());
     Object fileNameRaw = args.get("file_name");
+
     if (!(fileNameRaw instanceof String fileName) || fileName.isBlank()) {
       throw new IllegalArgumentException("Missing/invalid argument 'file_name'");
     }
-    return getFileContent(fileName);
+
+    return getFileContentTool(fileName);
   }
 
-  public static ChatCompletionRequest.Tool getFileContent() {
+  public static ChatCompletionRequest.Tool getFileContentTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("get_file_content")
         .description("Fetches the content of a file given its name, resolved against a configured base directory")
@@ -50,7 +52,7 @@ public class GetFileContentTool implements Toolbox.Tool {
     return new ChatCompletionRequest.Tool("function", function);
   }
 
-  private static String getFileContent(String fileName) {
+  private static String getFileContentTool(String fileName) {
     return getFileContentFromDir(BASE_DIR, fileName);
   }
 

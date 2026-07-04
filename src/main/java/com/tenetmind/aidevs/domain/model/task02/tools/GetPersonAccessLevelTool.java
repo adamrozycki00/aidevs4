@@ -66,7 +66,7 @@ public class GetPersonAccessLevelTool implements Toolbox.Tool {
     }
   }
 
-  public static ChatCompletionRequest.Tool getPersonAccessLevel() {
+  public static ChatCompletionRequest.Tool getPersonAccessLevelTool() {
     var function = ChatCompletionRequest.Function.builder()
         .name("get_person_access_level")
         .description("Returns person's access level to power plants: integer 1-10")
