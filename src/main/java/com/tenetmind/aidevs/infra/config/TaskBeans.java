@@ -1,7 +1,5 @@
 package com.tenetmind.aidevs.infra.config;
 
-import com.tenetmind.aidevs.domain.model.task01.Task01;
-import com.tenetmind.aidevs.domain.model.task01.extractor.LlmTagExtractor;
 import com.tenetmind.aidevs.domain.model.task02.Task02;
 import com.tenetmind.aidevs.domain.model.task02.tools.Toolbox;
 import com.tenetmind.aidevs.domain.ports.out.LlmClient;
@@ -17,12 +15,6 @@ public class TaskBeans {
 
   @Autowired
   private LlmClient llmClient;
-
-  @Bean
-  public Task01 task01() {
-    var tagExtractor = new LlmTagExtractor(llmClient);
-    return new Task01(tagExtractor);
-  }
 
   @Bean
   public Task02 task02() {

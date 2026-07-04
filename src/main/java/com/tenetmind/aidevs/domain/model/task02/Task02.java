@@ -1,5 +1,13 @@
 package com.tenetmind.aidevs.domain.model.task02;
 
+import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.FIND_HIM;
+import static com.tenetmind.aidevs.domain.model.llmchat.util.LlmUtil.readJsonSchema;
+import static com.tenetmind.aidevs.domain.model.task02.tools.CalculateDistanceTool.calculateDistance;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetFileContentTool.getFileContent;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonAccessLevelTool.getPersonAccessLevel;
+import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonLocationsTool.getPersonLocations;
+import static java.util.Objects.nonNull;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,19 +16,10 @@ import com.tenetmind.aidevs.domain.model.llmchat.ChatCompletionRequest;
 import com.tenetmind.aidevs.domain.model.llmchat.Message;
 import com.tenetmind.aidevs.domain.model.task02.tools.Toolbox;
 import com.tenetmind.aidevs.domain.ports.out.LlmClient;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static com.tenetmind.aidevs.domain.model.Tasks.TaskName.FIND_HIM;
-import static com.tenetmind.aidevs.domain.model.llmchat.util.LlmUtil.readJsonSchema;
-import static com.tenetmind.aidevs.domain.model.task02.tools.CalculateDistanceTool.calculateDistance;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetFileContentTool.getFileContent;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonAccessLevelTool.getPersonAccessLevel;
-import static com.tenetmind.aidevs.domain.model.task02.tools.GetPersonLocationsTool.getPersonLocations;
-import static java.util.Objects.nonNull;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Task02 extends Task {
