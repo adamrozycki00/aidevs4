@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import static java.util.Objects.isNull;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 public class Toolbox {
 
@@ -44,7 +44,7 @@ public class Toolbox {
   }
 
   public static Map<String, Object> parseArguments(String argumentsJson) {
-    if (isNotBlank(argumentsJson)) {
+    if (isBlank(argumentsJson)) {
       return Map.of();
     }
 
